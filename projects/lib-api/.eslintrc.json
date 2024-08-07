@@ -1,0 +1,19 @@
+{
+  "extends": "../../.eslintrc.json",
+  "ignorePatterns": ["!**/*", "**/test.ts"],
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "parserOptions": {
+        "project": ["./projects/lib-api/tsconfig.lib.json"]
+      },
+      "rules": {
+        "rxjs/no-implicit-any-catch": 0
+      }
+    },
+    {
+      "files": ["*.html"],
+      "rules": {}
+    }
+  ]
+}

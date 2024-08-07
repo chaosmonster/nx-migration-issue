@@ -1,0 +1,29 @@
+{{{responseMethodTsComments}}}protected {{responseMethodName}}({{>operationParameters}}): Observable<{{@root.responseClass}}<{{{resultType}}}>> {
+
+    const requestBuilder: {{@root.requestBuilderClass}} = new {{@root.requestBuilderClass}}(this.rootUrl, {{@root.typeName}}.{{operation.pathVar}}, '{{operation.method}}');
+    if (params) {
+{{#operation.parameters}}
+      requestBuilder.{{in}}('{{{name}}}', params{{{varAccess}}}, {{{parameterOptions}}});
+{{/operation.parameters}}
+{{#requestBody}}
+      requestBuilder.body(params.body, '{{{mediaType}}}');
+{{/requestBody}}
+    }
+
+    // Build the Request
+    const request: HttpRequest<any> = requestBuilder.build({
+      responseType: '{{responseType}}',
+      accept: '{{accept}}',
+      context: context
+    });
+
+    // if there is an interceptor, intercept the request.
+    this.requestInterceptor(request);
+
+    return this.responseInterceptor$(this.http.request(request).pipe(
+      filter((response: any) => response instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        {{> handleResponse}}
+      })
+    )) as Observable<{{@root.responseClass}}<{{{resultType}}}>>;
+  }

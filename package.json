@@ -1,0 +1,102 @@
+{
+  "name": "migration demo",
+  "version": "0.0.1",
+  "scripts": {
+    "app:portal:build": "ng build app-portal",
+    "app:portal:dev": "ng serve app-portal -o",
+    "app:portal:test:build": "ng test --project app-portal --karma-config ./projects/app-portal/karma-pipeline.conf.js --no-watch --no-progress",
+    "build": "npm run lib:api:build && npm run lib:ui:build && npm run app:portal:build",
+    "format": "prettier --write projects --cache",
+    "format:check": "prettier --check projects --cache",
+    "lib:api:build": "ng build lib-api",
+    "lib:api:dev": "ng build lib-api --watch --configuration development",
+    "lib:ui:build": "ng build lib-ui",
+    "lib:ui:dev": "ng build lib-ui --watch --configuration development",
+    "lib:ui:test:build": "ng test --project lib-ui --karma-config ./projects/lib-ui/karma-pipeline.conf.js --no-watch --no-progress",
+    "lint:code": "ng lint --fix",
+    "test:build": "npm run lib:api:build && npm run lib:ui:build && concurrently \"npm:lib:ui:test:build\" \"npm:app:portal:test:build\"",
+    "ng": "ng"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^18.0.1",
+    "@angular/cdk": "^18.0.1",
+    "@angular/common": "^18.0.1",
+    "@angular/compiler": "^18.0.1",
+    "@angular/core": "^18.0.1",
+    "@angular/forms": "^18.0.1",
+    "@angular/platform-browser": "^18.0.1",
+    "@angular/platform-browser-dynamic": "^18.0.1",
+    "@angular/router": "^18.0.1",
+    "@angular/service-worker": "^18.0.1",
+    "@company/api": "file://./dist/lib-api",
+    "@company/ui": "file://./dist/lib-ui",
+    "rxjs": "~7.8.1",
+    "tslib": "^2.6.2",
+    "zone.js": "~0.14.6"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^18.0.2",
+    "@angular-eslint/builder": "18.0.1",
+    "@angular-eslint/eslint-plugin": "18.0.1",
+    "@angular-eslint/eslint-plugin-template": "18.0.1",
+    "@angular-eslint/schematics": "18.0.1",
+    "@angular-eslint/template-parser": "18.0.1",
+    "@angular/cli": "~18.0.2",
+    "@angular/compiler-cli": "^18.0.1",
+    "@types/jasmine": "~5.1.4",
+    "@types/uuid": "^9.0.8",
+    "@typescript-eslint/eslint-plugin": "^7.11.0",
+    "@typescript-eslint/parser": "^7.11.0",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.57.0",
+    "eslint-plugin-jasmine": "^4.1.3",
+    "eslint-plugin-jsdoc": "^48.2.7",
+    "eslint-plugin-rxjs": "^5.0.3",
+    "istanbul-lib-coverage": "~3.2.2",
+    "istanbul-lib-report": "~3.0.1",
+    "istanbul-reports": "~3.1.7",
+    "jasmine-core": "~5.1.2",
+    "karma": "~6.4.3",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.1",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "karma-sonarqube-unit-reporter": "^0.0.23",
+    "karma-spec-reporter": "~0.0.36",
+    "ng-openapi-gen": "0.24.1",
+    "ng-packagr": "^18.0.0",
+    "owasp-dependency-check": "0.0.21",
+    "prettier": "3.3.0",
+    "stylelint": "^16.6.1",
+    "stylelint-config-standard-scss": "^13.1.0",
+    "typescript": "~5.4.5"
+  },
+  "overrides": {
+    "localtunnel": {
+      "axios": "1.6.2"
+    }
+  },
+  "optionalDependencies": {
+    "@esbuild/linux-x64": "0.19.10",
+    "@nx/nx-darwin-arm64": "17.2.8",
+    "@nx/nx-darwin-x64": "17.2.8",
+    "@nx/nx-linux-x64-gnu": "17.2.8",
+    "@nx/nx-win32-x64-msvc": "17.2.8"
+  },
+  "scarfSettings": {
+    "enabled": false
+  },
+  "prettier": {
+    "overrides": [
+      {
+        "files": [
+          "*.html"
+        ],
+        "options": {
+          "parser": "angular"
+        }
+      }
+    ]
+  }
+}

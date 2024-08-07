@@ -1,0 +1,89 @@
+/* eslint-disable */
+
+import { HttpClient, HttpRequest } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { catchError, Observable, throwError } from 'rxjs';
+
+import { {{configurationClass}} } from './{{configurationFile}}';
+
+/**
+ * Base class for services
+ *
+ * @export
+ * @class BaseService
+ */
+@Injectable({ providedIn: 'root' })
+export class {{baseServiceClass}} {
+  public constructor(
+    protected config: {{configurationClass}},
+    protected http: HttpClient
+  ) {
+  }
+
+  /**
+   * The Request Root URL
+   *
+   * @private
+   * @type {string}
+   * @memberof BaseService
+   */
+  private _rootUrl: string = '';
+
+  /**
+   * Returns the root url for all operations in this service. If not set directly in this
+   * service, will fallback to `{{configurationClass}}.rootUrl`.
+   *
+   * @type {string}
+   * @memberof BaseService
+   */
+  public get rootUrl(): string {
+    return this._rootUrl || this.config.rootUrl;
+  }
+
+  /**
+   * Sets the root URL for API operations in this service.
+   *
+   * @param {string} rootUrl
+   * @memberof BaseService
+   */
+  public set rootUrl(rootUrl: string) {
+    this._rootUrl = rootUrl;
+  }
+
+  /**
+   * Request Interceptor
+   *
+   * @protected
+   * @param {HttpRequest<any>} request
+   * @memberof BaseService
+   */
+  protected requestInterceptor(request: HttpRequest<any>): void { /* Override this method if needed */ }
+
+  /**
+   * Response Interceptor
+   *
+   * @protected
+   * @param {Observable<any>} observableRes$
+   * @returns {Observable<any>}
+   * @memberof BaseService
+   */
+  protected responseInterceptor$(observableRes$: Observable<any>): Observable<any> {
+    return observableRes$.pipe(
+      catchError((err, source) => this.onCatch$(err, source))
+    )
+  }
+
+  /**
+   * Http error handler.
+   *
+   * @protected
+   * @param {*} response
+   * @param {Observable<any>} source$
+   * @returns {Observable<any>}
+   * @memberof BaseService
+   */
+  protected onCatch$(response: any, source$: Observable<any>): Observable<any> {
+    /* Override this method if needed */
+    return throwError(() => response);
+  }
+}

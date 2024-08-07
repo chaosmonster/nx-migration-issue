@@ -1,0 +1,170 @@
+{
+  "root": true,
+  "ignorePatterns": ["projects/**/*"],
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/strict",
+        "plugin:@typescript-eslint/stylistic",
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "plugin:rxjs/recommended",
+        "plugin:jsdoc/recommended-typescript-error"
+      ],
+      "rules": {
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "app",
+            "style": "kebab-case"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "app",
+            "style": "kebab-case"
+          }
+        ],
+        "rxjs/finnish": [
+          "error",
+          {
+            "functions": true,
+            "methods": true,
+            "names": {
+              "^(canActivate|canActivateChild|canDeactivate|canLoad|intercept|resolve|validate)$": false
+            },
+            "parameters": true,
+            "properties": true,
+            "strict": false,
+            "types": {
+              "^EventEmitter$": false
+            },
+            "variables": true
+          }
+        ],
+        "@typescript-eslint/explicit-member-accessibility": "error",
+        "@typescript-eslint/typedef": [
+          "error",
+          {
+            "arrayDestructuring": true,
+            "memberVariableDeclaration": true,
+            "objectDestructuring": true,
+            "parameter": true,
+            "propertyDeclaration": true,
+            "variableDeclaration": true,
+            "variableDeclarationIgnoreFunction": true
+          }
+        ],
+        "@typescript-eslint/explicit-function-return-type": [
+          "error",
+          {
+            "allowExpressions": true
+          }
+        ],
+        "@typescript-eslint/naming-convention": [
+          "error",
+          {
+            "selector": "memberLike",
+            "modifiers": ["private"],
+            "format": ["camelCase"],
+            "leadingUnderscore": "require"
+          }
+        ],
+        "@typescript-eslint/no-unused-vars": [
+          "error",
+          { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }
+        ],
+        "@typescript-eslint/no-invalid-void-type": 0,
+        "@typescript-eslint/no-dynamic-delete": 0,
+        "@typescript-eslint/no-explicit-any": 0,
+        "@typescript-eslint/no-inferrable-types": 0,
+        "@typescript-eslint/no-extraneous-class": 0,
+        "no-extra-boolean-cast": 0,
+
+        "jsdoc/require-jsdoc": [
+          "error",
+
+          {
+            "contexts": [
+              "PropertyDefinition",
+              "TSInterfaceDeclaration",
+              "TSMethodSignature",
+              "TSPropertySignature"
+            ],
+            "publicOnly": { "ancestorsOnly": true },
+            "require": {
+              "FunctionDeclaration": true,
+              "MethodDefinition": true,
+              "ClassDeclaration": true, // Disabled, does not run with decorators!
+              "ClassExpression": true, // Disabled, does not run with decorators!
+              "ArrowFunctionExpression": true,
+              "FunctionExpression": true
+            }
+          }
+        ],
+        "jsdoc/tag-lines": 0,
+        "jsdoc/check-tag-names": 0,
+        "jsdoc/require-returns-type": 1,
+        "jsdoc/require-property-type": 1,
+        "jsdoc/no-undefined-types": 1,
+        "jsdoc/no-types": 0,
+        "jsdoc/require-param-description": 0,
+        "jsdoc/no-defaults": 0,
+        "jsdoc/require-returns": 1,
+        "jsdoc/require-returns-description": 0
+      }
+    },
+    {
+      "files": ["*.spec.ts"],
+      "plugins": ["jasmine"],
+      "env": {
+        "jasmine": true
+      },
+      "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "plugin:jasmine/recommended"
+      ],
+      "rules": {
+        "@angular-eslint/component-selector": 0,
+        "@angular-eslint/directive-selector": 0,
+        "@typescript-eslint/explicit-function-return-type": 0,
+        "@typescript-eslint/explicit-member-accessibility": 0,
+        "@typescript-eslint/no-empty-function": 0,
+        "@typescript-eslint/no-explicit-any": 0,
+        "@typescript-eslint/no-inferrable-types": 0,
+        "@typescript-eslint/no-non-null-assertion": 0,
+        "@typescript-eslint/typedef": 0,
+        "jasmine/new-line-before-expect": 0,
+        "jasmine/no-spec-dupes": 0,
+        "jasmine/no-suite-dupes": 0,
+        "no-extra-boolean-cast": 0,
+        "rxjs/finnish": 0,
+        "jsdoc/require-jsdoc": [
+          "error",
+          {
+            "require": {
+              "FunctionDeclaration": true,
+              "MethodDefinition": false,
+              "ClassDeclaration": false,
+              "ArrowFunctionExpression": false,
+              "FunctionExpression": false
+            }
+          }
+        ]
+      }
+    },
+    {
+      "files": ["*.html"],
+      "extends": ["plugin:@angular-eslint/template/recommended"],
+      "rules": {}
+    }
+  ]
+}
